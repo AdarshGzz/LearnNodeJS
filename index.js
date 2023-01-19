@@ -1,4 +1,4 @@
-const fs = require("fs");
+// const fs = require("fs");
 
 // ////creating an new file
 
@@ -24,3 +24,15 @@ const fs = require("fs");
 // fs.renameSync("myBio.txt","./adarsh/mybio.txt");
 // fs.unlinkSync("./adarsh/mybio.txt");
 // fs.rmdirSync("adarsh");
+
+
+///////////////////////////////////////////////////////////////////////////
+
+//// creating a basic server
+
+const http = require('http');
+
+http.createServer((req,res)=>{
+    res.write("this is Adarsh");
+    res.end();
+}).listen (4500);
