@@ -85,22 +85,36 @@
 
 ////////////////////////////////
 
-const http = require('http');
-const port = 4500;
-const data = require('./data');
+// const http = require('http');
+// const port = 4500;
+// const data = require('./data');
 
-const requestHandler = (request,response) => {
-    console.log(request.url);
-    response.writeHead(200,{'Content-Type':'application/json'});
-    response.write(JSON.stringify(data));
-    response.end();
+// const requestHandler = (request,response) => {
+//     console.log(request.url);
+//     response.writeHead(200,{'Content-Type':'application/json'});
+//     response.write(JSON.stringify(data));
+//     response.end();
+// }
+
+// const server = http.createServer(requestHandler);
+
+// server.listen(port,(err) =>{
+//     if(err){
+//         return console.log('something is wrong',err);
+//     }
+//     console.log(`listening on ${port}`);
+// });
+
+////////////////////////////////
+const fs = require('fs');
+
+const input = process.argv;
+if(input[2]=='add'){
+    fs.writeFileSync(input[3], input[4]);
 }
-
-const server = http.createServer(requestHandler);
-
-server.listen(port,(err) =>{
-    if(err){
-        return console.log('something is wrong',err);
-    }
-    console.log(`listening on ${port}`);
-});
+else if(input[2]=='remove'){
+    fs.unlinkSync(input[3]);
+}
+else{
+    console.log('invalid output')
+}
