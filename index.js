@@ -54,15 +54,60 @@
 // // console.log("hello".red);
 
 
-// include http module in the file
+// content of index.js
+// const http = require('http')
+// const port = 3000
+
+// const requestHandler = (request, response) => {
+//   console.log(request.url)
+//   response.writeHead(200,{'Content-Type': 'application/json'});
+//   response.write(
+//     JSON.stringify({
+//       name: "adarsh",
+//       id: "akjkd",
+//       description: "dsjfksdfld",
+//       location: "kjdfklsjdkl",
+//       password: 8347838,
+//     })
+//   );
+//   response.end();
+// }
+
+// const server = http.createServer(requestHandler)
+
+// server.listen(port, (err) => {
+//   if (err) {
+//     return console.log('something bad happened', err)
+//   }
+
+//   console.log(`server is listening on ${port}`)
+// })
+
+////////////////////////////////
+
 const http = require('http');
- 
-// create a server
-http.createServer = ((req, res) => {
-    // http header
-    // 200 - is the OK message
-    // to respond with html content, 'Content-Type' should be 'text/html'
-    res.writeHead(200, {'Content-Type': 'text/html'}); 
-    res.write('Node.js says hello!'); //write a response to the client
-    res.end(); //end the response
-}).listen(9000); //the server object listens on port 9000
+const port = 4500;
+
+const requestHandler = (request,response) => {
+    console.log(request.url);
+    response.writeHead(200,{'Content-Type':'application/json'});
+    response.write(
+      JSON.stringify({
+        name: "adarsh",
+        id: "akjkd",
+        description: "dsjfksdfld",
+        location: "kjdfklsjdkl",
+        password: 8347838,
+      })
+    );
+    response.end();
+}
+
+const server = http.createServer(requestHandler);
+
+server.listen(port,(err) =>{
+    if(err){
+        return console.log('something is wrong',err);
+    }
+    console.log(`listening on ${port}`);
+});
