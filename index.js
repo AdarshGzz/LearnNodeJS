@@ -142,16 +142,41 @@
 
 ////////////////////////////////
 
-let a= 20;
-let b= 0;
+// let a= 20;
+// let b= 0;
 
-let waitingData = new Promise((resolve,reject)=>{
-    setTimeout(() => {
-      resolve(30);
-    }, 2000);
-})
+// let waitingData = new Promise((resolve,reject)=>{
+//     setTimeout(() => {
+//       resolve(30);
+//     }, 2000);
+// })
 
-waitingData.then((data)=>{
-    b = data;
-  console.log(a+b)
-});
+// waitingData.then((data)=>{
+//     b = data;
+//   console.log(a+b)
+// });
+
+////////////////////////////////////////////////////////////////
+
+const fs = require('fs');
+// fs.mkdir("adarsh",(err)=>{
+//   console.log("folder created")
+// });
+// fs.writeFile("./adarsh/bio.txt","my name is adarsh",(err)=>{
+//   console.log("file created");
+// })
+// fs.appendFile("./adarsh/bio.txt"," i will be better than every one i know in all aspects",()=>{
+//   console.log("file appended");
+// })
+// fs.readFile("./adarsh/bio.txt",'utf-8',(err,data)=>{
+//   console.log(data);
+// })
+// fs.rename('./adarsh/bio.txt','./adarsh/Bio.txt',()=>{
+//   console.log("renamed")
+// })
+// fs.unlink("./adarsh/bio.txt",()=>{
+//   console.log("file deleted");
+// })
+// fs.rmdir("./adarsh",()=>{
+//   console.log("folder deleted");
+// })
