@@ -223,6 +223,34 @@
 
 ////////////////////////////////////////////
 
+// const express = require('express');
+// const app  =  express();
+// const path = require('path');
+// const fs = require('fs');
+// const port= 5100;
+
+// const publicPath = path.join(__dirname,`public`);
+// // app.use(express.static(publicPath));
+// app.get('',(req, res) =>{
+//     res.sendFile(`${publicPath}/index.html`)
+// })
+// app.get('/aboutme',(req, res) =>{
+//     res.sendFile(`${publicPath}/about.html`)
+// })
+// app.get('/help',(req, res) =>{
+//     res.sendFile(`${publicPath}/help.html`)
+// })
+
+// app.get('*',(req,res)=>{
+//     res.sendFile(`${publicPath}/404.html`)
+// })
+
+// app.listen(port)
+
+////////////////////////////////////////////////////////////////
+
+// working with ejs engine and dyanmic routing
+
 const express = require('express');
 const app  =  express();
 const path = require('path');
@@ -230,7 +258,8 @@ const fs = require('fs');
 const port= 5100;
 
 const publicPath = path.join(__dirname,`public`);
-// app.use(express.static(publicPath));
+app.set('view engine','ejs');
+
 app.get('',(req, res) =>{
     res.sendFile(`${publicPath}/index.html`)
 })
@@ -241,9 +270,23 @@ app.get('/help',(req, res) =>{
     res.sendFile(`${publicPath}/help.html`)
 })
 
+app.get('/profile',(req,res)=>{
+    const user = {
+      name: "adarsh",
+      email: "adarsh@gmail.com",
+      city: "sdl",
+      skills:['c++','html','css','javascript']
+    };
+    res.render('profile',{user})
+})
+
+app.get('/login',(req,res)=>{
+    res.render('login');
+})
+
 app.get('*',(req,res)=>{
     res.sendFile(`${publicPath}/404.html`)
 })
 
-app.listen(port)
 
+app.listen(port)
