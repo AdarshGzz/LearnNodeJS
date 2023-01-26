@@ -249,44 +249,74 @@
 
 ////////////////////////////////////////////////////////////////
 
-// working with ejs engine and dyanmic routing
+// // working with ejs engine and dyanmic routing
+
+// const express = require('express');
+// const app  =  express();
+// const path = require('path');
+// const fs = require('fs');
+// const port= 5100;
+
+// const publicPath = path.join(__dirname,`public`);
+// app.set('view engine','ejs');
+
+// app.get('',(req, res) =>{
+//     res.sendFile(`${publicPath}/index.html`)
+// })
+// app.get('/aboutme',(req, res) =>{
+//     res.sendFile(`${publicPath}/about.html`)
+// })
+// app.get('/help',(req, res) =>{
+//     res.sendFile(`${publicPath}/help.html`)
+// })
+
+// app.get('/profile',(req,res)=>{
+//     const user = {
+//       name: "adarsh",
+//       email: "adarsh@gmail.com",
+//       city: "sdl",
+//       skills:['c++','html','css','javascript']
+//     };
+//     res.render('profile',{user})
+// })
+
+// app.get('/login',(req,res)=>{
+//     res.render('login');
+// })
+
+// app.get('*',(req,res)=>{
+//     res.sendFile(`${publicPath}/404.html`)
+// })
+
+
+// app.listen(port)
+
+
+////////////////////////////////////////////////////////////////////
+// middlewares(application level)
 
 const express = require('express');
-const app  =  express();
+const app = express();
 const path = require('path');
-const fs = require('fs');
-const port= 5100;
+const { listenerCount } = require('process');
+const port = 5100;
 
-const publicPath = path.join(__dirname,`public`);
-app.set('view engine','ejs');
+const reqFilter = (req,res,next) =>{
+    if(!req.query.age){
+        res.send("please provied age");
+    }
+    else if(req.query.age<18){
+        res.send("you are under age");
+    }
+    else{
+      next();
+    }
+}
+    
+app.use(reqFilter);
 
-app.get('',(req, res) =>{
-    res.sendFile(`${publicPath}/index.html`)
-})
-app.get('/aboutme',(req, res) =>{
-    res.sendFile(`${publicPath}/about.html`)
-})
-app.get('/help',(req, res) =>{
-    res.sendFile(`${publicPath}/help.html`)
-})
-
-app.get('/profile',(req,res)=>{
-    const user = {
-      name: "adarsh",
-      email: "adarsh@gmail.com",
-      city: "sdl",
-      skills:['c++','html','css','javascript']
-    };
-    res.render('profile',{user})
+app.get('',(req,res)=>{
+    res.send('Welcome')
 })
 
-app.get('/login',(req,res)=>{
-    res.render('login');
-})
-
-app.get('*',(req,res)=>{
-    res.sendFile(`${publicPath}/404.html`)
-})
-
-
-app.listen(port)
+app.listen(port);
