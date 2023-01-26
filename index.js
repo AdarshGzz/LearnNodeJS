@@ -158,7 +158,7 @@
 
 ////////////////////////////////////////////////////////////////
 
-const fs = require('fs');
+// const fs = require('fs');
 // fs.mkdir("adarsh",(err)=>{
 //   console.log("folder created")
 // });
@@ -180,3 +180,70 @@ const fs = require('fs');
 // fs.rmdir("./adarsh",()=>{
 //   console.log("folder deleted");
 // })
+
+////////////////////////////////////////////////////////////////////////
+
+// handeling asynchronus js
+
+// let a = 20;
+// let b =0;
+
+// let waitingData = new Promise((resolve, reject)=>{
+//   setTimeout(() => {
+//     resolve(30);
+//   }, 2000);
+// })
+// waitingData.then((data)=>{
+//   b=data;
+//   console.log(a+b)
+// })
+
+////////////////////////////////////////////////////////////////////////
+
+// // starting expressjs
+
+// const express = require('express')
+// const app = express()
+// const port = 8080;
+
+// app.get('',(req,res)=>{
+//     console.log(req.query.name)
+//     res.send("this is a hollow world "+ req.query.name)
+// })
+
+// app.get('/about',(req,res)=>{
+//     res.send("and i live here")
+// })
+
+// app.get('/help',(req,res)=>{
+//     res.send("help i live here")
+// })
+
+// app.listen(port)
+
+////////////////////////////////////////////
+
+const express = require('express');
+const app  =  express();
+const path = require('path');
+const fs = require('fs');
+const port= 5100;
+
+const publicPath = path.join(__dirname,`public`);
+// app.use(express.static(publicPath));
+app.get('',(req, res) =>{
+    res.sendFile(`${publicPath}/index.html`)
+})
+app.get('/aboutme',(req, res) =>{
+    res.sendFile(`${publicPath}/about.html`)
+})
+app.get('/help',(req, res) =>{
+    res.sendFile(`${publicPath}/help.html`)
+})
+
+app.get('*',(req,res)=>{
+    res.sendFile(`${publicPath}/404.html`)
+})
+
+app.listen(port)
+
