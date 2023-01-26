@@ -293,30 +293,56 @@
 
 
 ////////////////////////////////////////////////////////////////////
-// middlewares(application level)
+// // middlewares(application level)
+
+// const express = require('express');
+// const app = express();
+// const path = require('path');
+// const { listenerCount } = require('process');
+// const port = 5100;
+
+// const reqFilter = (req,res,next) =>{
+//     if(!req.query.age){
+//         res.send("please provied age");
+//     }
+//     else if(req.query.age<18){
+//         res.send("you are under age");
+//     }
+//     else{
+//       next();
+//     }
+// }
+    
+// app.use(reqFilter);
+
+// app.get('',(req,res)=>{
+//     res.send('Welcome')
+// })
+
+// app.listen(port);
+
+////////////////////////////////////////////////////////////////////
+// middlewares(route level)
 
 const express = require('express');
 const app = express();
+const reqFilter = require('./middleware')
 const path = require('path');
-const { listenerCount } = require('process');
 const port = 5100;
-
-const reqFilter = (req,res,next) =>{
-    if(!req.query.age){
-        res.send("please provied age");
-    }
-    else if(req.query.age<18){
-        res.send("you are under age");
-    }
-    else{
-      next();
-    }
-}
-    
-app.use(reqFilter);
+const route = express.Router();
+route.use(reqFilter);
 
 app.get('',(req,res)=>{
     res.send('Welcome')
 })
+
+app.get('/home',reqFilter,(req,res)=>{
+    res.send('Welcome');
+})
+
+route.get('/contact',(req,res)=>{
+    res.send('this is contact page');
+})
+app.use('/',route);
 
 app.listen(port);
