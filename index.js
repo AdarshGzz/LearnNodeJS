@@ -366,12 +366,12 @@
 // getData();
 ////////////////////////////////////////////////////////////////////////
 ////making mongodb connections function 
-const {MongoClient} = require('mongodb');
-// //or//
-// const mongoClient = require('mongodb').mongoClient;
-const url = 'mongodb://localhost:27017';//Mongodb url
-const client = new MongoClient(url);
-const database = 'HustlerIsCoding';
+// const {MongoClient} = require('mongodb');
+// // //or//
+// // const mongoClient = require('mongodb').mongoClient;
+// const url = 'mongodb://localhost:27017';//Mongodb url
+// const client = new MongoClient(url);
+// const database = 'HustlerIsCoding';
 
 const dbConnect = require('./mongodb')
 // dbConnect().then((res)=>{
