@@ -349,6 +349,23 @@
 
 ////////////////////////////////////////////////////////////////////////
 ////using mongodb in nodeJs
+// const {MongoClient} = require('mongodb');
+// // //or//
+// // const mongoClient = require('mongodb').mongoClient;
+// const url = 'mongodb://localhost:27017';//Mongodb url
+// const client = new MongoClient(url);
+// const database = 'HustlerIsCoding';
+
+// async function getData(){
+//     let result = await client.connect();
+//     let db = result.db(database);
+//     let collection = db.collection('comments');
+//     let response = await collection.find({name:'adarsh'}).toArray();
+//     console.log(response);
+// }
+// getData();
+////////////////////////////////////////////////////////////////////////
+////making mongodb connections function 
 const {MongoClient} = require('mongodb');
 // //or//
 // const mongoClient = require('mongodb').mongoClient;
@@ -356,11 +373,16 @@ const url = 'mongodb://localhost:27017';//Mongodb url
 const client = new MongoClient(url);
 const database = 'HustlerIsCoding';
 
-async function getData(){
-    let result = await client.connect();
-    let db = result.db(database);
-    let collection = db.collection('comments');
-    let response = await collection.find({}).toArray();
-    console.log(response);
+const dbConnect = require('./mongodb')
+// dbConnect().then((res)=>{
+//    res.find().toArray().then((data)=>{
+//     console.warn(data);
+//    });
+// });
+
+const main = async () =>{
+    let data = await dbConnect();
+    data= await data.find().toArray();
+    console.warn(data);
 }
-getData();
+main();
