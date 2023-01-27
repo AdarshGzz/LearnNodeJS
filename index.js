@@ -322,27 +322,45 @@
 // app.listen(port);
 
 ////////////////////////////////////////////////////////////////////
-// middlewares(route level)
+// // middlewares(route level)
 
-const express = require('express');
-const app = express();
-const reqFilter = require('./middleware')
-const path = require('path');
-const port = 5100;
-const route = express.Router();
-route.use(reqFilter);
+// const express = require('express');
+// const app = express();
+// const reqFilter = require('./middleware')
+// const path = require('path');
+// const port = 5100;
+// const route = express.Router();
+// route.use(reqFilter);
 
-app.get('',(req,res)=>{
-    res.send('Welcome')
-})
+// app.get('',(req,res)=>{
+//     res.send('Welcome')
+// })
 
-app.get('/home',reqFilter,(req,res)=>{
-    res.send('Welcome');
-})
+// app.get('/home',reqFilter,(req,res)=>{
+//     res.send('Welcome');
+// })
 
-route.get('/contact',(req,res)=>{
-    res.send('this is contact page');
-})
-app.use('/',route);
+// route.get('/contact',(req,res)=>{
+//     res.send('this is contact page');
+// })
+// app.use('/',route);
 
-app.listen(port);
+// app.listen(port);
+
+////////////////////////////////////////////////////////////////////////
+////using mongodb in nodeJs
+const {MongoClient} = require('mongodb');
+// //or//
+// const mongoClient = require('mongodb').mongoClient;
+const url = 'mongodb://localhost:27017';//Mongodb url
+const client = new MongoClient(url);
+const database = 'HustlerIsCoding';
+
+async function getData(){
+    let result = await client.connect();
+    let db = result.db(database);
+    let collection = db.collection('comments');
+    let response = await collection.find({}).toArray();
+    console.log(response);
+}
+getData();
