@@ -1,4 +1,5 @@
 const express =require('express');
+const { ObjectId } = require('mongodb');
 const app = express();
 const dbConnect = require('./mongodb');
 const port = 5200;
@@ -26,9 +27,16 @@ app.put('/:_id',async (req,res)=>{
       { _id: ObjectID(`${_id}`) },
       { $set: req.body }
     );
-    console.log(_id)
-    console.log(req.body)
     res.send({result:"updated"})
+})
+
+app.delete('/:id', async(req,res)=>{
+    console.log(req.params.id)
+    let db = await dbConnect();
+    let result = await db.deleteOne(
+        {_id:ObjectId(req.params.id)}
+    )
+    res.send(result)
 })
 
 
