@@ -3,4 +3,4 @@ const dotenv = require('dotenv')
 dotenv.config()
 const url = process.env.URL
 mongoose.connect(url)
-
+const Products = require('./schema')
